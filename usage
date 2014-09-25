@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+if [ -f "$HOME/usage.txt" ]; then
+    rm "$HOME/usage.txt";
+fi
+
+echo $(date) >> $HOME/usage.txt
+echo "memory info:
+\
+" >> $HOME/usage.txt
+sed -n '1,7p' /proc/meminfo >> $HOME/usage.txt

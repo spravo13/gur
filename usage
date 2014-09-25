@@ -16,3 +16,4 @@ echo "memory info:
 sed -n '1,7p' /proc/meminfo >> "$HOME/usage/$date.txt"
 echo "\
 Your usage has been recorded in ~/usage/$date.txt";
+

@@ -20,4 +20,13 @@ echo "memory info:
 " >> $HOME/usage/$date/$record.txt
 sed -n '1,7p' /proc/meminfo >> "$HOME/usage/$date/$record.txt"
 echo "\
+"
+echo "
+storage space:
+\
+" >> $HOME/usage/$date/$record.txt
+df -h | sed -n 1p >> "$HOME/usage/$date/$record.txt"
+df -h | sed -n 2p >> "$HOME/usage/$date/$record.txt"
+
+echo "\
 Your usage has been recorded in ~/usage/$date/$record.txt";

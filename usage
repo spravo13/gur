@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
 date=$(date +%F);
+record=$(date +%H:%M:%S);
 
 if [ ! -d "$HOME/usage" ]; then
     mkdir "$HOME/usage";
 fi
 
-if [ -f "$HOME/usage/$date.txt" ]; then
-    rm "$HOME/usage/$date.txt";
+if [ ! -d "$HOME/usage/$date" ]; then
+    mkdir "$HOME/usage/$date";
 fi
 
-echo $(date) >> $HOME/usage/$date.txt
+if [ -f "$HOME/usage/$date/$record.txt" ]; then
+    rm "$HOME/usage/$date/$record.txt";
+fi
+
+echo $(date) >> $HOME/usage/$date/$record.txt
 echo "memory info:
 \
-" >> $HOME/usage/$date.txt
-sed -n '1,7p' /proc/meminfo >> "$HOME/usage/$date.txt"
+" >> $HOME/usage/$date/$record.txt
+sed -n '1,7p' /proc/meminfo >> "$HOME/usage/$date/$record.txt"
 echo "\
-Your usage has been recorded in ~/usage/$date.txt";
-
+Your usage has been recorded in ~/usage/$date/$record.txt";

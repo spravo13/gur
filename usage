@@ -28,5 +28,4 @@ storage space:
 df -h | sed -n 1p >> "$HOME/usage/$date/$record.txt"
 df -h | sed -n 2p >> "$HOME/usage/$date/$record.txt"
 
-echo "\
-Your usage has been recorded in ~/usage/$date/$record.txt";
+echo "Your usage has been recorded in ~/usage/$date/$record.txt";

@@ -28,4 +28,22 @@ storage space:
 df -h | sed -n 1p >> "$HOME/usage/$date/$record.txt"
 df -h | sed -n 2p >> "$HOME/usage/$date/$record.txt"
 
+echo "\
+top procceses:
+\
+" >> "$HOME/usage/$date/$record.txt"
+
+
+ps -eo pcpu,pid,user,args | sort -r -k1 | less | sed -n 1p >> "$HOME/usage/$date/$record.txt"
+ps -eo pcpu,pid,user,args | sort -r -k1 | less | sed -n 2p >> "$HOME/usage/$date/$record.txt"
+ps -eo pcpu,pid,user,args | sort -r -k1 | less | sed -n 3p >> "$HOME/usage/$date/$record.txt"
+ps -eo pcpu,pid,user,args | sort -r -k1 | less | sed -n 4p >> "$HOME/usage/$date/$record.txt"
+ps -eo pcpu,pid,user,args | sort -r -k1 | less | sed -n 5p >> "$HOME/usage/$date/$record.txt"
+ps -eo pcpu,pid,user,args | sort -r -k1 | less | sed -n 6p >> "$HOME/usage/$date/$record.txt"
+
+
+
+
+
+
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";

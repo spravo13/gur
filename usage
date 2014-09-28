@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
 date=$(date +%F);
 record=$(date +%H:%M:%S);
-
 if [ ! -d "$HOME/usage" ]; then
     mkdir "$HOME/usage";
 fi
-
 if [ ! -d "$HOME/usage/$date" ]; then
     mkdir "$HOME/usage/$date";
 fi
-
 if [ -f "$HOME/usage/$date/$record.txt" ]; then
     rm "$HOME/usage/$date/$record.txt";
 fi
-
 echo $(date) >> $HOME/usage/$date/$record.txt
 echo "
 \
@@ -36,6 +32,5 @@ echo "
 Network:_____________________________________________________________
 \
 " >> "$HOME/usage/$date/$record.txt"
-ifconfig >> "$HOME/usage/$date/$record.txt"
+/sbin/ifconfig |grep -B1 "inet addr" >> "$HOME/usage/$date/$record.txt"
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";
-

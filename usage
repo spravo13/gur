@@ -15,23 +15,28 @@ if [ -f "$HOME/usage/$date/$record.txt" ]; then
 fi
 
 echo $(date) >> $HOME/usage/$date/$record.txt
-echo "memory info:
+echo "
+\
+memory info:_________________________________________________________
 \
 " >> $HOME/usage/$date/$record.txt
 sed -n '1,7p' /proc/meminfo >> "$HOME/usage/$date/$record.txt"
-echo "\
-storage space:
+echo "
+\
+storage space:_______________________________________________________
 \
 " >> $HOME/usage/$date/$record.txt
-df -h | sed -n 1p >> "$HOME/usage/$date/$record.txt"
-df -h | sed -n 2p >> "$HOME/usage/$date/$record.txt"
-#echo "
-#
-#" >> "$HOME/usage/$date/$record.txt"
+df -h | sed -n 1,2p | cut -c 1-10,50-100 >> "$HOME/usage/$date/$record.txt"
+#df -h | sed -n 1p | cut -c57-100 >> "$HOME/usage/$date/$record.txt"
 echo " 
-top procceses:
+top procceses:_______________________________________________________
 " >> "$HOME/usage/$date/$record.txt"
 ps -eo pcpu,pmem,pid,user,args | sort -r -k1 | less | sed -n '1,6p' >> "$HOME/usage/$date/$record.txt"
-
+echo "
+\
+Network:_____________________________________________________________
+\
+" >> "$HOME/usage/$date/$record.txt"
+ifconfig >> "$HOME/usage/$date/$record.txt"
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";
 

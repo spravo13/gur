@@ -27,7 +27,6 @@ storage space:_______________________________________________________
 \
 " >> $HOME/usage/$date/$record.txt
 df -h | sed -n 1,2p | cut -c 1-10,50-100 >> "$HOME/usage/$date/$record.txt"
-#df -h | sed -n 1p | cut -c57-100 >> "$HOME/usage/$date/$record.txt"
 echo " 
 top procceses:_______________________________________________________
 " >> "$HOME/usage/$date/$record.txt"

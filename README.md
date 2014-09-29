@@ -27,7 +27,7 @@ critique, see Contact section below on how to contact me.
 
 If you have any questions or comments please contact me at <a title="Spencer@codeshrub.com" href="mailto:Spencer@codeshrub.com">Spencer@CodeShrub.com</a> or leave a comment wherever.
 
-/Spencer
+/Spencer Bravo
 
 ## Licence
 

@@ -6,15 +6,15 @@ I origally defined it by calling it "a bash script to take note of current usage
 This description is still pretty accurate. It creates a directory (~/usage) and it creates a date folder every time you log usage and in there it keeps the actual data in a file based on the time.
 
 ## Installation
-to Install usage all you need to do is move the `usage` file to somewhere in your `$PATH`.
+to Install usage all you need to do is move the `gur` file to somewhere in your `$PATH`.
 
 
-Unless you want to type `usage` every time you want to write your usage stats, add
+Unless you want to type `gur` every time you want to write your usage stats, add
 this command to your `.bashrc` or `.zshrc` file:
 
-	alias u='usage'
+	alias u='gur'
 
-Now instead of typing `usage` you just need to type `u`.
+Now instead of typing `gur` you just need to type `u`(for usage).
 
 ## Contributing
 

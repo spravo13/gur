@@ -1,4 +1,4 @@
-usage-stats
+GUR(GNU Usage Recorder)
 ===========
 
 This started as just a simple file to log current memory usage, but from there it has grown. 

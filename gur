@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="v1.0"
+version="v1.1"
 date=$(date +%F);
 record=$(date +%H:%M:%S);
 gurhelp(){

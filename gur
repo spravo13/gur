@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
-version="v1.1"
-date=$(date +%F);
-record=$(date +%H:%M:%S);
+version="v1.2"
 gurhelp(){
     echo "\
 GUR $version -GPL v3
-Usage: gur [-h] [-o] [-u]\
+Usage: gur [-h] [-o] [-u] [-t]\
 "
 }
 guroptions(){
@@ -26,15 +24,15 @@ status="on"
 
 timedusage(){
     timeprompt
-#while [[ $status == "on" ]]; do
-while [[ 0 == 0 ]]; do
-    echo $timedelay
+while [[ $status == "on" ]]; do
     usage
 sleep $timedelay
 done
 }
 
 usage() {
+date=$(date +%F);
+record=$(date +%H:%M:%S);
 if [ ! -d "$HOME/usage" ]; then
     mkdir "$HOME/usage";
 fi
@@ -74,9 +72,9 @@ Network:_____________________________________________________________
 \
 " >> "$HOME/usage/$date/$record.txt"
 /sbin/ifconfig |grep -B1 "inet addr" >> "$HOME/usage/$date/$record.txt"
-#if [[ $status != "on" ]];then
+if [[ $status != "on" ]];then
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";
-#fi
+fi
 }
 
 if [[ $1 == "" ]]; then

@@ -14,20 +14,29 @@ echo "\
 -o > show options
 -u > check usage and create in file"
 }
-#-t > set time intervals for usage records"
-#timeprompt(){
+#-t > set time intervals for usage records"^
+
+
+timeprompt(){
 #read -p "How often would you like to record your usage?(in seconds, i.e. 60 = 1 minute) 
 #\
 #" timedelay
-#}
+}
 
-usage() {
+timedusage(){
 #if [[ $1 == -t ]]; then         
     #while [[ 0 == 0 ]]; do
     #timedelay
 
 #elif [[ $1 == -u ]]; then
 
+#if [[ $time != "" ]]; then
+#sleep 30
+#fi
+#done
+}
+
+usage() {
 if [ ! -d "$HOME/usage" ]; then
     mkdir "$HOME/usage";
 fi
@@ -69,10 +78,6 @@ Network:_____________________________________________________________
 /sbin/ifconfig |grep -B1 "inet addr" >> "$HOME/usage/$date/$record.txt"
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";
 
-#if [[ $time != "" ]]; then
-#sleep 30
-#fi
-#done
 }
 
 if [[ $1 == "" ]]; then

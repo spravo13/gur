@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="v1.2"
+version="v1.3"
 gurhelp(){
     echo "\
 GUR $version -GPL v3
@@ -24,10 +24,10 @@ status="on"
 
 timedusage(){
     timeprompt
-while [[ $status == "on" ]]; do
+( while [[ $status == "on" ]]; do
     usage
 sleep $timedelay
-done
+done )&
 }
 
 usage() {

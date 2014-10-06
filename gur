@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-version="v1.3"
+version="v1.4"
 gurhelp(){
     echo "\
 GUR $version -GPL v3
-Usage: gur [-h] [-o] [-u] [-t]\
+Usage: gur [-h] [-o] [-u] [-t] [-k]\
 "
 }
 guroptions(){
@@ -11,7 +11,8 @@ echo "\
 -h > show help/info
 -o > show options
 -u > check usage and create in file
--t > set time intervals for usage records"
+-t > set time intervals for usage records
+-k > kill a time interval"
 }
 
 
@@ -19,14 +20,36 @@ timeprompt(){
 read -p "How often would you like to record your usage?(in seconds, i.e. 60 = 1 minute) 
 \
 " timedelay
-status="on"
+if [[ $timedelay != "" ]]; then
+    timestatus="on"
+fi
+}
+
+timeoff(){
+#if [[ $timestatus != on ]]; then
+#echo "GUR time interval usage tracker is already off"
+#else
+#read -p "Would you like to turn usage tracker by time off? (y/n) 
+#\
+#" yn
+#if [[ $yn == "y" ]]; then
+#    timestatus="off"
+#else 
+#echo "GUR will continue to track your usage in ~/usage
+#\
+#"
+#fi
+#fi
+( killall bash )&
 }
 
 timedusage(){
     timeprompt
-( while [[ $status == "on" ]]; do
-    usage
-sleep $timedelay
+( while [[ $timestatus == "on" ]]; do
+    if [[ $timestatus == "on" ]]; then 
+        usage
+        sleep $timedelay
+    fi
 done )&
 }
 
@@ -72,7 +95,7 @@ Network:_____________________________________________________________
 \
 " >> "$HOME/usage/$date/$record.txt"
 /sbin/ifconfig |grep -B1 "inet addr" >> "$HOME/usage/$date/$record.txt"
-if [[ $status != "on" ]];then
+if [[ $timestatus != "on" ]];then
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";
 fi
 }
@@ -87,4 +110,6 @@ elif [[ $1 == -u ]]; then
     usage
 elif [[ $1 == -t ]]; then
     timedusage
+elif [[ $1 == -k ]]; then
+    timeoff
 fi

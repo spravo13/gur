@@ -20,9 +20,9 @@ timeprompt(){
 read -p "How often would you like to record your usage?(in seconds, i.e. 60 = 1 minute) 
 \
 " timedelay
-if [[ $timedelay != "" ]]; then
-    timestatus="on"
-fi
+#if [[ $timedelay != "" ]]; then
+    #timestatus="on"
+#fi
 }
 
 timeoff(){
@@ -40,20 +40,22 @@ timeoff(){
 #"
 #fi
 #fi
-( killall bash )&
+#( killall bash )&
+timedelay=""
 }
 
 timedusage(){
     timeprompt
-( while [[ $timestatus == "on" ]]; do
-    if [[ $timestatus == "on" ]]; then 
+( while [[ $timedelay != "" ]]; do
         usage
         sleep $timedelay
-    fi
 done )&
 }
 
 usage() {
+#if [[ $timestatus != "on" ]]; then 
+#    timedelay=""
+#fi
 date=$(date +%F);
 record=$(date +%H:%M:%S);
 if [ ! -d "$HOME/usage" ]; then
@@ -95,7 +97,7 @@ Network:_____________________________________________________________
 \
 " >> "$HOME/usage/$date/$record.txt"
 /sbin/ifconfig |grep -B1 "inet addr" >> "$HOME/usage/$date/$record.txt"
-if [[ $timestatus != "on" ]];then
+if [[ $timedelay == "" ]];then
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";
 fi
 }

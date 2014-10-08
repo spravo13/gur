@@ -20,28 +20,10 @@ timeprompt(){
 read -p "How often would you like to record your usage?(in seconds, i.e. 60 = 1 minute) 
 \
 " timedelay
-#if [[ $timedelay != "" ]]; then
-    #timestatus="on"
-#fi
 }
 
 timeoff(){
-#if [[ $timestatus != on ]]; then
-#echo "GUR time interval usage tracker is already off"
-#else
-#read -p "Would you like to turn usage tracker by time off? (y/n) 
-#\
-#" yn
-#if [[ $yn == "y" ]]; then
-#    timestatus="off"
-#else 
-#echo "GUR will continue to track your usage in ~/usage
-#\
-#"
-#fi
-#fi
-#( killall bash )&
-timedelay=""
+( killall bash )&
 }
 
 timedusage(){
@@ -53,9 +35,6 @@ done )&
 }
 
 usage() {
-#if [[ $timestatus != "on" ]]; then 
-#    timedelay=""
-#fi
 date=$(date +%F);
 record=$(date +%H:%M:%S);
 if [ ! -d "$HOME/usage" ]; then

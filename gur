@@ -22,7 +22,7 @@ read -p "How often would you like to record your usage?(in seconds, i.e. 60 = 1 
 " timedelay
 }
 
-timeoff(){
+timekill(){
 ( killall bash )&
 }
 
@@ -92,5 +92,5 @@ elif [[ $1 == -u ]]; then
 elif [[ $1 == -t ]]; then
     timedusage
 elif [[ $1 == -k ]]; then
-    timeoff
+    timekill
 fi

@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 version="v1.4"
+
 gurhelp(){
     echo "\
 GUR $version -GPL v3
 Usage: gur [-h] [-o] [-u] [-t] [-k]\
 "
 }
+
 guroptions(){
 echo "\
 -h > show help/info
@@ -14,7 +16,6 @@ echo "\
 -t > set time intervals for usage records
 -k > kill a time interval"
 }
-
 
 timeprompt(){
 read -p "How often would you like to record your usage?(in seconds, i.e. 60 = 1 minute) 
@@ -37,6 +38,7 @@ done )&
 usage() {
 date=$(date +%F);
 record=$(date +%H:%M:%S);
+
 if [ ! -d "$HOME/usage" ]; then
     mkdir "$HOME/usage";
 fi

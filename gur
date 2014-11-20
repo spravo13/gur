@@ -95,4 +95,6 @@ elif [[ $1 == -t ]]; then
     timedusage
 elif [[ $1 == -k ]]; then
     timekill
+else
+    gurhelp
 fi

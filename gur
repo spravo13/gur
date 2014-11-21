@@ -34,7 +34,17 @@ timedusage(){
         sleep $timedelay
 done )&
 }
-
+online-check() {
+    wget https://google.com --quiet --output-document=tmpindex.html;
+    if [ tmpindex.html == "" ]; then
+        echo "\
+You appear to be offline" >> "$HOME/usage/$date/$record.txt";
+    else
+        echo "\
+You appear to be online" >> "$HOME/usage/$date/$record.txt";
+    fi
+    rm tmpindex.html;
+}
 usage() {
 date=$(date +%F);
 record=$(date +%H:%M:%S);
@@ -77,6 +87,7 @@ echo "
 Network:_____________________________________________________________
 \
 " >> "$HOME/usage/$date/$record.txt"
+( online-check )&
 /sbin/ifconfig |grep -B1 "inet addr" >> "$HOME/usage/$date/$record.txt"
 if [[ $timedelay == "" ]];then
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";

@@ -12,7 +12,7 @@ This description is still pretty accurate. It creates a directory (~/usage) and 
 | -u     | Log usage               |
 | -t      | Log usage on time delay  |
 | -k     | Kill current time delay   |
-
+| -c    | Clear all usage logs   |
 ## Installation
 to Install gur all you need to do is move the `gur` file to somewhere in your `$PATH`.
 

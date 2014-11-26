@@ -10,12 +10,12 @@ Usage: gur [-h] [-o] [-u] [-t] [-k] [-c]\
 
 guroptions(){
 echo "\
--h > show help/info
--o > show options
--u > check usage and create in file
--t > set time intervals for usage records
--k > kill a time interval
--c > clear all logs"
+-h > shows help/info
+-o > shows options
+-u > checks usage and logs into file
+-t > sets time intervals for usage records
+-k > kills a time interval
+-c > clears all logs"
 }
 
 timeprompt(){

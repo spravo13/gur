@@ -89,11 +89,23 @@ memory info:_________________________________________________________
 sed -n '1,7p' /proc/meminfo >> "$HOME/usage/$date/$record.txt"
 echo "
 \
+CPU info:____________________________________________________________
+\
+" >> $HOME/usage/$date/$record.txt
+echo "All cpu stats: " >> "$HOME/usage/$date/$record.txt"
+top -bn1 | sed -n 3p >> "$HOME/usage/$date/$record.txt"
+echo "Average: " >> "$HOME/usage/$date/$record.txt"
+top -bn1 | grep "Cpu(s)" | \
+    sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | \
+    awk '{print 100 - $1"%"}' >> "$HOME/usage/$date/$record.txt"
+
+echo "
 storage space:_______________________________________________________
 \
 " >> $HOME/usage/$date/$record.txt
 df -h | sed -n 1,2p | cut -c 1-10,50-100 >> "$HOME/usage/$date/$record.txt"
 echo " 
+
 top procceses:_______________________________________________________
 " >> "$HOME/usage/$date/$record.txt"
 ps -eo pcpu,pmem,pid,user,args | sort -r -k1 | less | sed -n '1,11p' >> "$HOME/usage/$date/$record.txt"

@@ -119,7 +119,7 @@ Network:_____________________________________________________________
 ( online-check )&
 /sbin/ifconfig |grep -B1 "inet addr" >> "$file"
 if [[ $timedelay == "" ]];then
-echo "Your usage has been recorded in ~/usage/$date/$record.txt";
+    echo "Your usage has been recorded in ~/usage/$date/$record.txt";
 fi
 }
 

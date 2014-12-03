@@ -1,14 +1,13 @@
 GUR(GNU Usage Recorder)
 ===========
 
-This started as just a simple file to log current memory usage, but from there it has grown(Currently at a stable v1.6 and v2.0-beta.2). 
+This started as just a simple file to log current memory usage, but from there it has grown(Currently at a stable v1.6 and v2.0-beta.3). 
 I origally defined it by calling it "a bash script to take note of current usage"
 This description is still pretty accurate. It creates a directory (~/usage) and it creates a date folder every time you log usage and in there it keeps the actual data in a file based on the time. view other features below.
 
 | Option | Description                 |
 | ------ | --------------------------- |
 | -h     | Show help/info              |
-| -o     | Lists options               |
 | -u     | Log usage               |
 | -t      | Log usage on time delay  |
 | -k     | Kill current time delay   |

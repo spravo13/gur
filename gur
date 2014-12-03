@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="v2.0-beta.2"
+version="v2.0-beta.3"
 
 main(){
     echo "\
@@ -16,7 +16,6 @@ Example: gur -u
 
 Options:
     -h > shows help/info
-    -o > shows options
     -u > checks usage and logs into file
     -t > sets time intervals for usage records
     -k > kills a time interval
@@ -114,8 +113,6 @@ if [[ $1 == "" ]]; then
     main
 elif [[ $1 == -h ]]; then
     gurhelp
-elif [[ $1 == -o ]]; then
-    guroptions
 elif [[ $1 == -u ]]; then
     usage
 elif [[ $1 == -t ]]; then

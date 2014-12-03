@@ -80,42 +80,44 @@ fi
 if [ -f "$HOME/usage/$date/$record.txt" ]; then
     rm "$HOME/usage/$date/$record.txt";
 fi
-echo $(date) >> $HOME/usage/$date/$record.txt
+touch $HOME/usage/$date/$record.txt
+file="$HOME/usage/$date/$record.txt"
+echo $(date) >> "$file"
 echo "
 \
 memory info:_________________________________________________________
 \
-" >> $HOME/usage/$date/$record.txt
-sed -n '1,7p' /proc/meminfo >> "$HOME/usage/$date/$record.txt"
+" >> "$file"
+sed -n '1,7p' /proc/meminfo >> "$file"
 echo "
 \
 CPU info:____________________________________________________________
 \
-" >> $HOME/usage/$date/$record.txt
-echo "All cpu stats: " >> "$HOME/usage/$date/$record.txt"
-top -bn1 | sed -n 3p >> "$HOME/usage/$date/$record.txt"
-echo "Average: " >> "$HOME/usage/$date/$record.txt"
+" >> "$file"
+echo "All cpu stats: " >> "$file"
+top -bn1 | sed -n 3p >> "$file"
+echo "Average: " >> "$file"
 top -bn1 | grep "Cpu(s)" | \
     sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | \
-    awk '{print 100 - $1"%"}' >> "$HOME/usage/$date/$record.txt"
+    awk '{print 100 - $1"%"}' >> "$file"
 
 echo "
 storage space:_______________________________________________________
 \
-" >> $HOME/usage/$date/$record.txt
-df -h | sed -n 1,2p | cut -c 1-10,50-100 >> "$HOME/usage/$date/$record.txt"
+" >> "$file"
+df -h | sed -n 1,2p | cut -c 1-10,50-100 >> "$file"
 echo " 
 
 top procceses:_______________________________________________________
-" >> "$HOME/usage/$date/$record.txt"
-ps -eo pcpu,pmem,pid,user,args | sort -r -k1 | less | sed -n '1,11p' >> "$HOME/usage/$date/$record.txt"
+" >> "$file"
+ps -eo pcpu,pmem,pid,user,args | sort -r -k1 | less | sed -n '1,11p' >> "$file"
 echo "
 \
 Network:_____________________________________________________________
 \
-" >> "$HOME/usage/$date/$record.txt"
+" >> "$file"
 ( online-check )&
-/sbin/ifconfig |grep -B1 "inet addr" >> "$HOME/usage/$date/$record.txt"
+/sbin/ifconfig |grep -B1 "inet addr" >> "$file"
 if [[ $timedelay == "" ]];then
 echo "Your usage has been recorded in ~/usage/$date/$record.txt";
 fi

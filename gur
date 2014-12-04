@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="v2.0-beta.4"
+version="v2.0-beta.5"
 
 main(){
     echo "\

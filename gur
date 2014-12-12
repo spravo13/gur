@@ -47,7 +47,7 @@ timedusage(){
 }
 
 online-check() {
-    wget https://google.com --quiet --output-document=tmpindex.html;
+    wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet --output-document=tmpindex.html;
     if [ tmpindex.html == "" ]; then
         echo "\
 You appear to be offline" >> "$HOME/usage/$date/$record.txt";

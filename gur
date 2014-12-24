@@ -46,7 +46,7 @@ timedusage(){
     done )&
 }
 
-online-check() {
+online-check(){
     wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet --output-document=tmpindex.html;
     if [ tmpindex.html == "" ]; then
         echo "\
@@ -58,7 +58,7 @@ You appear to be online" >> "$HOME/usage/$date/$record.txt";
     rm tmpindex.html;
 }
 
-gurclear() {
+gurclear(){
     read -p "Are you sure you wan't to clear all logs? This will permanently delete all usage records (y/n)" deleteconfirm;
     if [ $deleteconfirm == "y" ]; then
         echo "deleting all logs...";
@@ -69,7 +69,7 @@ gurclear() {
     fi 
 }
 
-usage() {
+usage(){
     date=$(date +%F);
     record=$(date +%H:%M:%S);
     if [ ! -d "$HOME/usage" ]; then
@@ -122,9 +122,7 @@ Network:_____________________________________________________________
     fi
 }
 
-if [[ $1 == "" ]]; then
-    main
-elif [[ $1 == -h ]]; then
+if [[ $1 == -h ]]; then
     gurhelp
 elif [[ $1 == -u ]]; then
     usage

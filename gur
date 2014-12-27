@@ -30,7 +30,7 @@ timeprompt(){
 }
 
 timekill(){
-    read -p "This will kill all bash processes, are you sure you want to do stop the time interval?(y/n)" timekillconf
+    read -p "This will kill all bash processes. Are you sure you want to do stop the time interval?(y/n)" timekillconf
     if [ $timekillconf == "y" ]; then 
         ( killall bash )&
     else
@@ -59,13 +59,13 @@ You appear to be online" >> "$HOME/usage/$date/$record.txt";
 }
 
 gurclear(){
-    read -p "Are you sure you wan't to clear all logs? This will permanently delete all usage records (y/n)" deleteconfirm;
+    read -p "Are you sure you wan't to clear all logs? This will permanently delete all current usage records (y/n)" deleteconfirm;
     if [ $deleteconfirm == "y" ]; then
         echo "deleting all logs...";
         rm -rf $HOME/usage/*;
         echo "done";
     else
-        echo "ok, exiting now";
+        echo "okay, exiting now";
     fi 
 }
 

@@ -120,16 +120,23 @@ Network:_____________________________________________________________
     fi
 }
 
-if [[ $1 == -h ]]; then
-    gurhelp
-elif [[ $1 == -u ]]; then
-    usage
-elif [[ $1 == -t ]]; then
-    timedusage
-elif [[ $1 == -k ]]; then
-    timekill
-elif [[ $1 == -c ]]; then
-    gurclear
-else
-    main
-fi
+case "$1" in
+    "")
+        main
+        ;;
+    -h|--help)
+        gurhelp
+        ;;
+    -u|--usage)
+        usage
+        ;;
+    -t|--timed)
+        timedusage
+        ;;
+    -k|--kill)
+        timekill
+        ;;
+    -c|--clear)
+        gurclear
+        ;;
+esac

@@ -47,11 +47,9 @@ timedusage(){
 online-check(){
     wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet --output-document=tmpindex.html;
     if [ tmpindex.html == "" ]; then
-        echo "\
-You appear to be offline" >> "$HOME/usage/$date/$record.txt";
+        echo "You appear to be offline" >> "$HOME/usage/$date/$record.txt";
     else
-        echo "\
-You appear to be online" >> "$HOME/usage/$date/$record.txt";
+        echo "You appear to be online" >> "$HOME/usage/$date/$record.txt";
     fi
     rm tmpindex.html;
 }
@@ -83,15 +81,11 @@ usage(){
     file="$HOME/usage/$date/$record.txt"
     echo $(date) >> "$file"
     echo "
-\
 memory info:_________________________________________________________
-\
 " >> "$file"
     sed -n '1,7p' /proc/meminfo >> "$file"
     echo "
-\
 CPU info:____________________________________________________________
-\
 " >> "$file"
     echo "All cpu stats: " >> "$file"
     top -bn1 | sed -n 3p >> "$file"
@@ -101,17 +95,15 @@ CPU info:____________________________________________________________
     awk '{print 100 - $1"%"}' >> "$file"
     echo "
 storage space:_______________________________________________________
-\
 " >> "$file"
-    df -h | sed -n 1,2p | cut -c 1-10,50-100 >> "$file"
+    #df -h | sed -n 1,2p | cut -c 1-10,50-100 >> "$file"
+    df -h | sed -n 1,2p >> "$file"
     echo " 
 top procceses:_______________________________________________________
 " >> "$file"
     ps -eo pcpu,pmem,pid,user,args | sort -r -k1 | less | sed -n '1,11p' >> "$file"
     echo "
-\
 Network:_____________________________________________________________
-\
 " >> "$file"
     online-check 
     /sbin/ifconfig |grep -B1 "inet addr" >> "$file"

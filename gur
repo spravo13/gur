@@ -5,14 +5,13 @@ main(){
     echo "\
 GUR $version -GPL v3
 Usage: gur [OPTION]
-Try 'gur -h' for more information.\
-"
+Try 'gur -h' for more information."
 }
 
 gurhelp(){
     echo "GUR $version -GPL v3
 Usage: gur [OPTION]
-    
+
     -h, --help > shows help/info
     -u, --usage > checks usage and logs into file
     -t, --timed > sets time intervals for usage records
@@ -29,7 +28,7 @@ timeprompt(){
 
 timekill(){
     read -p "This will kill all bash processes. Are you sure you want to do stop the time interval?(y/n)" timekillconf
-    if [ $timekillconf == "y" ]; then 
+    if [ $timekillconf == "y" ]; then
         ( killall bash )&
     else
         echo "ok";
@@ -90,21 +89,19 @@ CPU info:____________________________________________________________
     echo "All cpu stats: " >> "$file"
     top -bn1 | sed -n 3p >> "$file"
     echo "Average: " >> "$file"
-    top -bn1 | grep "Cpu(s)" | \
-    sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | \
-    awk '{print 100 - $1"%"}' >> "$file"
+    top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}' >> "$file"
     echo "
 storage space:_______________________________________________________
 " >> "$file"
     df -h | sed -n 1,2p >> "$file"
-    echo " 
+    echo "
 top procceses:_______________________________________________________
 " >> "$file"
     ps -eo pcpu,pmem,pid,user,args | sort -r -k1 | less | sed -n '1,11p' >> "$file"
     echo "
 Network:_____________________________________________________________
 " >> "$file"
-    online-check 
+    online-check
     /sbin/ifconfig |grep -B1 "inet addr" >> "$file"
     if [[ $timedelay == "" ]];then
         echo "Your usage has been recorded in ~/usage/$date/$record.txt";

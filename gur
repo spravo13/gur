@@ -2,8 +2,7 @@
 version="v2.3"
 
 main(){
-    echo "\
-GUR $version -GPL v3
+    echo "GUR $version -GPL v3
 Usage: gur [OPTION]
 Try 'gur -h' for more information."
 }

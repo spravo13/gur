@@ -44,13 +44,13 @@ timedusage(){
 }
 
 online-check(){
-    wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet --output-document=/tmp/tmpindex.html;
-    if [ /tmp/tmpindex.html == "" ]; then
+    wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet --output-document=/tmp/tmp.html;
+    if [ /tmp/tmp.html == "" ]; then
         echo "You appear to be offline" >> "$HOME/usage/$date/$record.txt";
     else
         echo "You appear to be online" >> "$HOME/usage/$date/$record.txt";
     fi
-    rm /tmp/tmpindex.html;
+    rm /tmp/tmp.html;
 }
 
 gurclear(){
@@ -67,17 +67,17 @@ gurclear(){
 usage(){
     date=$(date +%F);
     record=$(date +%H:%M:%S);
+    file="$HOME/usage/$date/$record.txt"
     if [ ! -d "$HOME/usage" ]; then
         mkdir "$HOME/usage";
     fi
     if [ ! -d "$HOME/usage/$date" ]; then
         mkdir "$HOME/usage/$date";
     fi
-    if [ -f "$HOME/usage/$date/$record.txt" ]; then
-        rm "$HOME/usage/$date/$record.txt";
+    if [ -f "$file" ]; then
+        rm "$file";
     fi
-    touch $HOME/usage/$date/$record.txt
-    file="$HOME/usage/$date/$record.txt"
+    touch $file
     echo $(date) >> "$file"
     echo "
 memory info:_________________________________________________________
@@ -104,7 +104,7 @@ Network:_____________________________________________________________
     online-check
     /sbin/ifconfig |grep -B1 "inet addr" >> "$file"
     if [[ $timedelay == "" ]];then
-        echo "Your usage has been recorded in ~/usage/$date/$record.txt";
+        echo "Your usage has been recorded in $file";
     fi
 }
 

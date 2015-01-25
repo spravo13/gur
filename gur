@@ -44,13 +44,13 @@ timedusage(){
 }
 
 online-check(){
-    wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet --output-document=tmpindex.html;
-    if [ tmpindex.html == "" ]; then
+    wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet --output-document=/tmp/tmpindex.html;
+    if [ /tmp/tmpindex.html == "" ]; then
         echo "You appear to be offline" >> "$HOME/usage/$date/$record.txt";
     else
         echo "You appear to be online" >> "$HOME/usage/$date/$record.txt";
     fi
-    rm tmpindex.html;
+    rm /tmp/tmpindex.html;
 }
 
 gurclear(){

@@ -13,7 +13,7 @@ This description is still pretty accurate. gur creates a directory (~/usage) as 
 | -k     | Kill current time delay   |
 | -c    | Clear all usage logs   |
 ## Installation
-to Install gur all you need to do is move the `gur` file to somewhere in your `$PATH`.
+First clone the repository and then all you need to do is to move the `gur` file to somewhere in your `$PATH`.
 
 ## Contributing
 

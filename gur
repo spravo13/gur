@@ -43,20 +43,20 @@ timedusage() {
 }
 
 online-check() {
-	wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet --output-document=/tmp/tmp.html;
-	if [ /tmp/tmp.html == "" ]; then
+	wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet;
+	if [ $? != 0 ]; then
 		echo "You appear to be offline" >> "$HOME/usage/$date/$record.txt";
 	else
 		echo "You appear to be online" >> "$HOME/usage/$date/$record.txt";
 	fi
-	rm /tmp/tmp.html;
 }
 
 gurclear() {
 	read -p "Are you sure you wan't to clear all logs? This will permanently delete all current usage records (y/n)" deleteconfirm;
 	if [ "$deleteconfirm" == "y" ]; then
 		echo "deleting all logs...";
-		rm -rf "$HOME/usage/*";
+		rm -rf "$HOME/usage/";
+		mkdir "$HOME/usage/";
 		echo "done";
 	else
 		echo "okay, exiting now";

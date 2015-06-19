@@ -25,14 +25,14 @@ timeprompt() {
 	echo "gur has been set to record usage every $timedelay seconds. Use \"gur -k\" to stop recording"
 }
 
-timekill() {
-	read -p "This will kill all bash processes. Are you sure you want to do stop the time interval?(y/n)" timekillconf
-	if [ $timekillconf == "y" ]; then
-		( killall bash )&
-	else
-		echo "ok";
-	fi
-}
+#timekill() {
+#	read -p "This will kill all bash processes. Are you sure you want to do stop the time interval?(y/n)" timekillconf
+#	if [ $timekillconf == "y" ]; then
+#		( killall bash )&
+#	else
+#		echo "ok";
+#	fi
+#}
 
 timedusage() {
 	timeprompt

@@ -2,131 +2,131 @@
 version="v2.3"
 
 main() {
-	echo "GUR $version -GPL v3
+    echo "GUR $version -GPL v3
 Usage: gur [OPTION]
 Try 'gur -h' for more information."
 }
 
 gurhelp() {
-	echo "GUR $version -GPL v3
+    echo "GUR $version -GPL v3
 Usage: gur [OPTION]
 
-	-h, --help > shows help/info
-	-u, --usage > checks usage and logs into file
-	-t, --timed > sets time intervals for usage records
-	-k, --kill > kills a time interval
-	-c, --clear > clears all logs
+    -h, --help > shows help/info
+    -u, --usage > checks usage and logs into file
+    -t, --timed > sets time intervals for usage records
+    -k, --kill > kills a time interval
+    -c, --clear > clears all logs
 
 Author: Spencer Bravo <spencer@codeshrub.com>"
 }
 
 timeprompt() {
-	read -p "How often would you like to record your usage?(in seconds, i.e. 60 = 1 minute) " timedelay
-	echo "gur has been set to record usage every $timedelay seconds. Use \"gur -k\" to stop recording"
+    read -p "How often would you like to record your usage?(in seconds, i.e. 60 = 1 minute) " timedelay
+    echo "gur has been set to record usage every $timedelay seconds. Use \"gur -k\" to stop recording"
 }
 
 #timekill() {
-#	read -p "This will kill all bash processes. Are you sure you want to do stop the time interval?(y/n)" timekillconf
-#	if [ $timekillconf == "y" ]; then
-#		( killall bash )&
-#	else
-#		echo "ok";
-#	fi
+#   read -p "This will kill all bash processes. Are you sure you want to do stop the time interval?(y/n)" timekillconf
+#   if [ $timekillconf == "y" ]; then
+#       ( killall bash )&
+#   else
+#       echo "ok";
+#   fi
 #}
 
 timedusage() {
-	timeprompt
-	( while [[ $timedelay != "" ]]; do
-		usage
-		sleep "$timedelay"
-	done )&
+    timeprompt
+    ( while [[ $timedelay != "" ]]; do
+        usage
+        sleep "$timedelay"
+    done )&
 }
 
 online-check() {
-	wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet;
-	if [ $? != 0 ]; then
-		echo "You appear to be offline" >> "$HOME/usage/$date/$record.txt";
-	else
-		echo "You appear to be online" >> "$HOME/usage/$date/$record.txt";
-	fi
+    wget http://codeshrub.com/googlebd6a67c150af87b1.html --quiet;
+    if [ $? != 0 ]; then
+        echo "You appear to be offline" >> "$HOME/usage/$date/$record.txt";
+    else
+        echo "You appear to be online" >> "$HOME/usage/$date/$record.txt";
+    fi
 }
 
 gurclear() {
-	read -p "Are you sure you wan't to clear all logs? This will permanently delete all current usage records (y/n)" deleteconfirm;
-	if [ "$deleteconfirm" == "y" ]; then
-		echo "deleting all logs...";
-		rm -rf "$HOME/usage/";
-		mkdir "$HOME/usage/";
-		echo "done";
-	else
-		echo "okay, exiting now";
-	fi 
+    read -p "Are you sure you wan't to clear all logs? This will permanently delete all current usage records (y/n)" deleteconfirm;
+    if [ "$deleteconfirm" == "y" ]; then
+        echo "deleting all logs...";
+        rm -rf "$HOME/usage/";
+        mkdir "$HOME/usage/";
+        echo "done";
+    else
+        echo "okay, exiting now";
+    fi 
 }
 
 usage() {
 
-	date=$(date +%F);
-	record=$(date +%H:%M:%S);
-	file="$HOME/usage/$date/$record.txt"
-	if [ ! -d "$HOME/usage" ]; then
-		mkdir "$HOME/usage";
-	fi
-	if [ ! -d "$HOME/usage/$date" ]; then
-		mkdir "$HOME/usage/$date";
-	fi
-	if [ -f "$file" ]; then
-		rm "$file";
-	fi
-	touch "$file"
-	date >> "$file"
-	echo "
+    date=$(date +%F);
+    record=$(date +%H:%M:%S);
+    file="$HOME/usage/$date/$record.txt"
+    if [ ! -d "$HOME/usage" ]; then
+        mkdir "$HOME/usage";
+    fi
+    if [ ! -d "$HOME/usage/$date" ]; then
+        mkdir "$HOME/usage/$date";
+    fi
+    if [ -f "$file" ]; then
+        rm "$file";
+    fi
+    touch "$file"
+    date >> "$file"
+    echo "
 memory info:_________________________________________________________
 " >> "$file"
-	sed -n '1,7p' /proc/meminfo >> "$file"
-	echo "
+    sed -n '1,7p' /proc/meminfo >> "$file"
+    echo "
 CPU info:____________________________________________________________
 " >> "$file"
-	echo "All cpu stats: " >> "$file"
-	top -bn1 | sed -n 3p >> "$file"
-	echo "Average: " >> "$file"
-	top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}' >> "$file"
-	echo "
+    echo "All cpu stats: " >> "$file"
+    top -bn1 | sed -n 3p >> "$file"
+    echo "Average: " >> "$file"
+    top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}' >> "$file"
+    echo "
 storage space:_______________________________________________________
 " >> "$file"
-	df -h | sed -n 1,2p >> "$file"
-	echo "
+    df -h | sed -n 1,2p >> "$file"
+    echo "
 top procceses:_______________________________________________________
 " >> "$file"
-	ps -eo pcpu,pmem,pid,user,args | sort -r -k1 | less | sed -n '1,11p' >> "$file"
-	echo "
+    ps -eo pcpu,pmem,pid,user,args | sort -r -k1 | less | sed -n '1,11p' >> "$file"
+    echo "
 Network:_____________________________________________________________
 " >> "$file"
-	online-check
-	/sbin/ifconfig |grep -B1 "inet addr" >> "$file"
-	if [[ $timedelay == "" ]];then
-		echo "Your usage has been recorded in $file";
-	fi
+    online-check
+    /sbin/ifconfig |grep -B1 "inet addr" >> "$file"
+    if [[ $timedelay == "" ]];then
+        echo "Your usage has been recorded in $file";
+    fi
 
 }
 
 case "$1" in
-	-h|--help)
-		gurhelp
-		;;
-	-u|--usage)
-		usage
-		;;
-	-t|--timed)
-		timedusage
-		;;
-	-k|--kill)
-		timekill
-		;;
-	-c|--clear)
-		gurclear
-		;;
-	*)
-		main
-		;;
+    -h|--help)
+        gurhelp
+        ;;
+    -u|--usage)
+        usage
+        ;;
+    -t|--timed)
+        timedusage
+        ;;
+#   -k|--kill)
+#       timekill
+#   ;;
+    -c|--clear)
+        gurclear
+        ;;
+    *)
+        main
+        ;;
 esac
 
